@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import json
 import csv
 import pandas as pd
+from datetime import datetime
 
 
 CATEGS = {}
@@ -60,9 +61,9 @@ for k,v in res_dict.items():
     prices.append(v)
 
 res_d = {'name':names, 'price':prices}
-
+date_today = dt = datetime.now().strftime('%d_%m_%y')
 df = pd.DataFrame(res_d)
-df.to_excel('3ddiy.xlsx' ,index=False)
+df.to_excel(f'3ddiy_{date_today}.xlsx' ,index=False)
 
 # mid_categs = []
 # for categ_top_name in CATEGS[0:2]:
