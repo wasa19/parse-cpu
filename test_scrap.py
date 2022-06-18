@@ -3,6 +3,7 @@ import lxml
 from bs4 import BeautifulSoup
 import json
 import csv
+import pandas as pd
 
 
 CATEGS = {}
@@ -51,6 +52,17 @@ for k, v in CATEGS.items():
                     res_dict[item_name] = item_price
         count += 1
         print(count)
+
+names = []
+prices = []
+for k,v in res_dict.items():
+    names.append(k)
+    prices.append(v)
+
+res_d = {'name':names, 'price':prices}
+
+df = pd.DataFrame(res_d)
+df.to_excel('3ddiy.xlsx' ,index=False)
 
 # mid_categs = []
 # for categ_top_name in CATEGS[0:2]:
