@@ -1,8 +1,8 @@
 import requests
-import lxml
+# import lxml
 from bs4 import BeautifulSoup
 import json
-import csv
+# import csv
 import pandas as pd
 from datetime import datetime
 
@@ -16,7 +16,7 @@ headers = {
 
 url = "https://3d-diy.ru/catalog/cnc-components/"
 
-req = requests.get(url=url, headers=headers).text
+# req = requests.get(url=url, headers=headers).text
 
 # пишем в файл, чтоб не тыркать сайт
 # with open('index.html', 'w') as file:
@@ -35,48 +35,36 @@ for i in categs_hrefs:
 
 count = 0
 for k, v in CATEGS.items():
-    if count == 0:
-        res_dict[k] = ''
-        for i in range(1, 8):
-            url = v + f'?PAGEN_1={i}'
-            req = requests.get(url=url, headers=headers).text
-            soup = BeautifulSoup(req, 'lxml')
-            item_infos = soup.find_all(class_='item_info TYPE_1')
-            for item_info in item_infos:
-                item_name = item_info.find(class_='item-title').text
-                try:
-                    item_price = item_info.find('span', class_='price_value').text
-                except(Exception) as e:
-                    item_price = 'No Price'
-                    print(e)
-                if item_name not in res_dict:
-                    res_dict[item_name] = item_price
-        count += 1
-        print(count)
+    res_dict[k] = ''
+    for i in range(1, 8):
+        url = v + f'?PAGEN_1={i}'
+        req = requests.get(url=url, headers=headers).text
+        soup = BeautifulSoup(req, 'lxml')
+        item_infos = soup.find_all(class_='item_info TYPE_1')
+        for item_info in item_infos:
+            item_name = item_info.find(class_='item-title').text
+            try:
+                item_price = item_info.find('span', class_='price_value').text
+            except(Exception) as e:
+                item_price = 'No Price'
+                # print(e)
+            if item_name not in res_dict:
+                res_dict[item_name] = item_price
+    count += 1
+    print(count)
 
-names = []
-prices = []
-for k,v in res_dict.items():
-    names.append(k)
-    prices.append(v)
+# dict_data.append(res_dict)
 
-res_d = {'name':names, 'price':prices}
-date_today = dt = datetime.now().strftime('%d_%m_%y')
-df = pd.DataFrame(res_d)
-df.to_excel(f'3ddiy_{date_today}.xlsx' ,index=False)
+# names = []
+# prices = []
+# for k,v in res_dict.items():
+#     names.append(k)
+#     prices.append(v)
 
-# mid_categs = []
-# for categ_top_name in CATEGS[0:2]:
-#     req = requests.get(url=categ_top_name, headers=headers).text
-#     soup = BeautifulSoup(req, 'lxml')
-#     try:
-#         categ_mid_names = soup.find(class_='list items').find_all(class_='name')
-#         for i in categ_mid_names:
-#             mid_categ_href = 'https://3d-diy.ru' + i.find('a').get('href')
-#             mid_categs.append(mid_categ_href)
-#     except(Exception) as e:
-#         print('No Mid Categ for  ' + categ_top_name)
-#         print(e)
+date_today = datetime.now().strftime('%d_%m_%y')
+# res_d = {'name':names, 'price':prices}
+# df = pd.DataFrame(res_d)
+# df.to_excel(f'3ddiy_{date_today}.xlsx' ,index=False)
 
-
-# print(mid_categs)
+with open(f'3ddiy_{date_today}.json', 'a') as file:
+    json.dump(res_dict, file, indent=4, ensure_ascii=False)
