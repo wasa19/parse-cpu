@@ -55,7 +55,7 @@ for categ_href in categs_hrefs_list:
 
 date_today = datetime.now().strftime('%d_%m_%y')
 
-with open(f'Data_darxtron/darxtron_{date_today}.json', 'w') as file:
+with open(f'Datas/Data_darxtron/darxtron_{date_today}.json', 'w') as file:
     json.dump(res_dict, file, indent=4, ensure_ascii=False)
     # writer = csv.writer(file)
     # writer.writerow(res_dict)

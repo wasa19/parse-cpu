@@ -58,5 +58,5 @@ date_today = datetime.now().strftime('%d_%m_%y')
 # df = pd.DataFrame(res_d)
 # df.to_excel(f'3ddiy_{date_today}.xlsx' ,index=False)
 
-with open(f'Data_3ddiy/3ddiy_{date_today}.json', 'w') as file:
+with open(f'Datas/Data_3ddiy/3ddiy_{date_today}.json', 'w') as file:
     json.dump(res_dict, file, indent=4, ensure_ascii=False)
