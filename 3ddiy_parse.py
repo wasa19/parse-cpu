@@ -19,10 +19,10 @@ url = "https://3d-diy.ru/catalog/cnc-components/"
 # req = requests.get(url=url, headers=headers).text
 
 # пишем в файл, чтоб не тыркать сайт
-# with open('index.html', 'w') as file:
+# with open('index_3ddiy.html', 'w') as file:
 #     file.write(req)
 
-with open('index.html', 'r') as file:
+with open('index_3ddiy.html', 'r') as file:
     src = file.read()
 
 soup = BeautifulSoup(src, 'lxml')
@@ -53,18 +53,10 @@ for k, v in CATEGS.items():
     count += 1
     print(count)
 
-# dict_data.append(res_dict)
-
-# names = []
-# prices = []
-# for k,v in res_dict.items():
-#     names.append(k)
-#     prices.append(v)
-
 date_today = datetime.now().strftime('%d_%m_%y')
 # res_d = {'name':names, 'price':prices}
 # df = pd.DataFrame(res_d)
 # df.to_excel(f'3ddiy_{date_today}.xlsx' ,index=False)
 
-with open(f'3ddiy_{date_today}.json', 'a') as file:
+with open(f'Data_3ddiy/3ddiy_{date_today}.json', 'w') as file:
     json.dump(res_dict, file, indent=4, ensure_ascii=False)

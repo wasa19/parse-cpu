@@ -1,8 +1,9 @@
+import csv
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
+# import pandas as pd
 import json
-import csv
+# import csv
 from datetime import datetime
 
 headers = {
@@ -49,10 +50,12 @@ for categ_href in categs_hrefs_list:
             name = card.find('h3').text
             price = card.find('div', class_="item__price item__pq-price").text
             res_dict[name] = price.strip().strip(' р. / шт')
-        count += 1
-        print(count)
+    count += 1
+    print(count)
 
 date_today = datetime.now().strftime('%d_%m_%y')
 
-with open(f'darxtron_{date_today}.json', 'a') as file:
+with open(f'Data_darxtron/darxtron_{date_today}.json', 'w') as file:
     json.dump(res_dict, file, indent=4, ensure_ascii=False)
+    # writer = csv.writer(file)
+    # writer.writerow(res_dict)
