@@ -1,3 +1,4 @@
 const_vars.py
 Datas
 __pycache__
+*.html

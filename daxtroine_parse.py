@@ -15,7 +15,6 @@ res_dict = {}
 
 # req = requests.get(url='https://darxton.ru/', headers=headers).text
 
-
 # with open("index_daxtron.html", "w") as file:
 #     file.write(req)
 
