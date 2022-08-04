@@ -13,7 +13,7 @@ def cut_res_to_output(res_value):
         except Exception as e:
             print(e)
     # так сортировать по величине значения в словаре
-    diff_values_list = sorted(more_diff_dict.items(), key=lambda x: abs(x[1]))  
+    diff_values_list = sorted(more_diff_dict.items(), key=lambda x: abs(x[1]))
       
     return diff_values_list
 

@@ -14,7 +14,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0"
 }
 
-url = "https://3d-diy.ru/catalog/cnc-components/"
+# url = "https://3d-diy.ru/catalog/cnc-components/"
 
 # req = requests.get(url=url, headers=headers).text
 

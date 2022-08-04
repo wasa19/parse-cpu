@@ -37,13 +37,13 @@ def create_res_msg(dir_name, since_time):
     new_file_time = time.ctime(os.path.getctime(list_of_files[-1]))
     # print(str(list_of_files[-1]), str(list_of_files[-2]))
 
-    cutting_res_list = cut_res_to_output(res_value)[-101:] if len(cut_res_to_output(res_value)) > 102 else cut_res_to_output(res_value)
+    cutting_res_list = cut_res_to_output(res_value)[-71:] if len(cut_res_to_output(res_value)) > 102 else cut_res_to_output(res_value)
     res_msg_data = f'Изменения цен:\nС {old_file_time}\nПо {new_file_time}\n\n'
     count_of_chng = len(cut_res_to_output(res_value))
     for i in cutting_res_list:
         add_str_value = f'{i[0]}   :   {i[1]}\n'
         res_msg_data += add_str_value
-    res_msg_data += f'\nтут до 100 изменений, всего {count_of_chng}'
+    res_msg_data += f'\nтут до 70 изменений, всего {count_of_chng}'
     res_msg_data += '\n\nGood Luck! )'
     return res_msg_data
 
@@ -93,17 +93,27 @@ def telegram_bot(token_tg):
             bot.send_message(message.chat.id, 'Выберите начальную дату', parse_mode='html', reply_markup=markup)
 
         elif message.text.lower() == 'день':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'pairdays'
             dir_name = 'Datas/Data_darxtron/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё \U00002b07', parse_mode='html', reply_markup=markup)
+
         elif message.text.lower() == 'неделя':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'week'
             dir_name = 'Datas/Data_darxtron/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
         elif message.text.lower() == 'месяц':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'month'
             dir_name = 'Datas/Data_darxtron/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
             
         elif message.text.lower() == '3ddiy':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
@@ -114,17 +124,26 @@ def telegram_bot(token_tg):
             bot.send_message(message.chat.id, 'Выберите начальную дату', parse_mode='html', reply_markup=markup)
 
         elif message.text.lower() == 'день.':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'pairdays'
             dir_name = 'Datas/Data_3ddiy/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
         elif message.text.lower() == 'неделя.':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'week'
             dir_name = 'Datas/Data_3ddiy/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
         elif message.text.lower() == 'месяц.':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'month'
             dir_name = 'Datas/Data_3ddiy/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
 
         elif message.text.lower() == 'cnc-tehnologi':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
@@ -135,17 +154,26 @@ def telegram_bot(token_tg):
             bot.send_message(message.chat.id, 'Выберите начальную дату', parse_mode='html', reply_markup=markup)
             
         elif message.text.lower() == '.день':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'pairdays'
             dir_name = 'Datas/Data_cnc/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
         elif message.text.lower() == '.неделя':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'week'
             dir_name = 'Datas/Data_cnc/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
         elif message.text.lower() == '.месяц':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
             since_time = 'month'
             dir_name = 'Datas/Data_cnc/'
             send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
 
         else:
             bot.send_message(message.chat.id, 'Нажмите кнопку магазина')
