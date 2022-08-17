@@ -48,6 +48,8 @@ for categ_href in categs_hrefs_list:
         for card in item_cards:
             name = card.find('h3').text
             price = card.find('div', class_="item__price item__pq-price").text
+            link = 'https://darxton.ru' + card.get('data-url')
+            # res_dict[name] = [price.strip().strip(' р. / шт'), link]
             res_dict[name] = price.strip().strip(' р. / шт')
     count += 1
     print(count)

@@ -35,9 +35,8 @@ def create_res_msg(dir_name, since_time):
 
     old_file_time = time.ctime(os.path.getctime(list_of_files[i]))
     new_file_time = time.ctime(os.path.getctime(list_of_files[-1]))
-    # print(str(list_of_files[-1]), str(list_of_files[-2]))
 
-    cutting_res_list = cut_res_to_output(res_value)[-71:] if len(cut_res_to_output(res_value)) > 102 else cut_res_to_output(res_value)
+    cutting_res_list = cut_res_to_output(res_value)[-71:] if len(cut_res_to_output(res_value)) > 72 else cut_res_to_output(res_value)
     res_msg_data = f'Изменения цен:\nС {old_file_time}\nПо {new_file_time}\n\n'
     count_of_chng = len(cut_res_to_output(res_value))
     for i in cutting_res_list:
@@ -177,8 +176,13 @@ def telegram_bot(token_tg):
 
         else:
             bot.send_message(message.chat.id, 'Нажмите кнопку магазина')
-        
-    bot.polling(none_stop=True)
+    while True:
+        try:    
+            bot.polling(none_stop=True, interval=0)
+        except Exception as e:
+            print(e)
+            time.sleep(5)
+            continue
 
 telegram_bot(token_tg)
 

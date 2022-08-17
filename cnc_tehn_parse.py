@@ -44,18 +44,22 @@ for categ_link in categ_links:
         if good_names_table:
             for good_name_table in good_names_table:
                 good_name = good_name_table.find('td', class_='name').find('a').text
+                good_link = good_name_table.find('a').get('href')
                 if good_name_table.find('td', class_='price'):
                     good_price = good_name_table.find('td', class_='price').find('span', class_='value').text
                 else:
                     good_price = ' - '
                 if good_name and good_price:
+                    # res_dict[good_name.strip()] = [good_price.strip(), 'https://cnc-tehnologi.ru'+good_link]
                     res_dict[good_name.strip()] = good_price.strip()
 
         elif good_names_list:
             for good_name_list in good_names_list:
                 good_name = good_name_list.find('div', class_='name').find('a').text
+                good_link = good_name_list.find('a').get('href')
                 good_price = good_name_list.find('div', class_='jshop_price').find('span').text
                 if good_name and good_price:
+                    # res_dict[good_name.strip()] = [good_price.strip(), 'https://cnc-tehnologi.ru'+good_link]
                     res_dict[good_name.strip()] = good_price.strip()
         print(count)
 
