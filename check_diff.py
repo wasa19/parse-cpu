@@ -53,11 +53,12 @@ def telegram_bot(token_tg):
 
     @bot.message_handler(commands=['start'])
     def start_message(message):
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
         btn1 = types.KeyboardButton('darxtron')
         btn2 = types.KeyboardButton('3ddiy')
         btn3 = types.KeyboardButton('cnc-tehnologi')
-        markup.add(btn1, btn2, btn3)
+        btn4 = types.KeyboardButton('purelogic')
+        markup.add(btn1, btn2, btn3, btn4)
         bot.send_message(message.chat.id, 'Выберите магазин', parse_mode='html', reply_markup=markup)
     
     @bot.message_handler(content_types=['text'])
@@ -70,7 +71,7 @@ def telegram_bot(token_tg):
                 create_res_msg(dir_name, since_time)
                 )
             except KeyError as e:
-                error_msg = 'no changes'
+                error_msg = 'Нет изменений'
                 bot.send_message(
                 message.chat.id,
                 error_msg
@@ -173,6 +174,37 @@ def telegram_bot(token_tg):
             dir_name = 'Datas/Data_cnc/'
             send_final_msg()
             bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
+
+        elif message.text.lower() == 'purelogic':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+            btn1 = types.KeyboardButton('день ')
+            btn2 = types.KeyboardButton('неделя ')
+            btn3 = types.KeyboardButton('месяц ')
+            markup.add(btn1, btn2, btn3)
+            bot.send_message(message.chat.id, 'Выберите начальную дату', parse_mode='html', reply_markup=markup)
+
+        elif message.text.lower() == 'день ':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
+            since_time = 'pairdays'
+            dir_name = 'Datas/Data_purelogic/'
+            send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
+        elif message.text.lower() == 'неделя ':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
+            since_time = 'week'
+            dir_name = 'Datas/Data_purelogic/'
+            send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
+        elif message.text.lower() == 'месяц ':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.add('/start')
+            since_time = 'month'
+            dir_name = 'Datas/Data_purelogic/'
+            send_final_msg()
+            bot.send_message(message.chat.id, 'Ещё', parse_mode='html', reply_markup=markup)
+
 
         else:
             bot.send_message(message.chat.id, 'Нажмите кнопку магазина')
