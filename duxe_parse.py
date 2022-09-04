@@ -103,7 +103,8 @@ def collect_duxe():
                     link_g = 'https://www.duxe.ru' + card.find('div', class_='item-title').find('a').get('href')
                     price = card.find('span', class_='price_value').text.replace(' ', '')
                 except Exception as e:
-                    print(e, link_g)
+                    print(e)
+                    price = 'NoPrice'
                 res_dict_link[name] = [price.strip(), link_g]
                 res_dict[name] = price.strip()
 

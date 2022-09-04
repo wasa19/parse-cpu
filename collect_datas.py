@@ -16,5 +16,4 @@ if __name__ == '__main__':
     collect_cnc()
     collect_darxtron()
     collect_purelogic()
-    collect_duxe
-    
+    collect_duxe()
